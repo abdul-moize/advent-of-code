@@ -49,25 +49,25 @@ while(!nextNodes.every((node, index) => (totalSteps > 0 && startingNodes[index] 
   if (endingPoints.length === 6) break;
 }
 
-console.log(endingPoints.reduce((acc, point) => acc * point[1], 1));
 
-
-console.log(startingNodes);
-console.log(nextNodes);
-
-console.log(totalSteps);
 // write a function to calculate least common multiple of numbers in an array
 
-const lcm = (arr) => {
-  const max = Math.max(...arr);
-  let multiple = max;
-  while (true) {
-    if (arr.every(num => multiple % num === 0)) {
-      return multiple;
-    }
-    multiple += max;
+const gcd = (a, b) => {
+  while (b !== 0) {
+    const temp = b;
+    b = a % b;
+    a = temp;
   }
-}
+  return a;
+};
+
+const lcm = (arr) => {
+  let result = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    result = (result * arr[i]) / gcd(result, arr[i]);
+  }
+  return result;
+};
 
 console.log(lcm(endingPoints.map( p => p[1])));
 
