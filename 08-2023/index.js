@@ -23,15 +23,22 @@ for (let i = 2; i < input.length; i++) {
 
 const nextNodes = [...startingNodes];
 
-// while (nextNode !== 'ZZZ') {
-//   const step = directions[steps] === 'R' ? 1 : 0;
-//   steps = (steps + 1) % directions.length;
-//   console.log(step, steps, nextNode, graph[nextNode])
-//   nextNode = graph[nextNode][step];
-//   totalSteps++;
-// }
+// Part 1
+
+while (nextNode !== 'ZZZ') {
+  const step = directions[steps] === 'R' ? 1 : 0;
+  steps = (steps + 1) % directions.length;
+
+  nextNode = graph[nextNode][step];
+  totalSteps++;
+}
+
+console.log('Part1:',totalSteps);
+
+totalSteps = 0;
 
 
+// Part 2
 let endingPoints = [];
 while(!nextNodes.every((node, index) => (totalSteps > 0 && startingNodes[index] === node) || node.endsWith('Z'))) {
   for (let i = 0; i < nextNodes.length; i++) {
@@ -48,9 +55,6 @@ while(!nextNodes.every((node, index) => (totalSteps > 0 && startingNodes[index] 
   totalSteps++;
   if (endingPoints.length === 6) break;
 }
-
-
-// write a function to calculate least common multiple of numbers in an array
 
 const gcd = (a, b) => {
   while (b !== 0) {
@@ -69,5 +73,5 @@ const lcm = (arr) => {
   return result;
 };
 
-console.log(lcm(endingPoints.map( p => p[1])));
+console.log('Part2:', lcm(endingPoints.map( p => p[1])));
 
