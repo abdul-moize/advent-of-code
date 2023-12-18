@@ -4,9 +4,8 @@ const inputFile = 'input.txt';
 
 const input = fs.readFileSync(inputFile, 'utf8').split('\n');
 
-let sum = 0;
+let sum1 = 0;
 
-// write a function which finds the first & last digit in a string of alphanumeric characters
 const findDigits = (str) => {
   let firstDigit = null;
   let lastDigit = null;
@@ -42,10 +41,13 @@ const findFirstAndLastDigits = (str) => {
   return { firstDigit, lastDigit };
 }
 
+let sum2 = 0;
 input.forEach((line) => {
   const { firstDigit, lastDigit } = findDigits(line);
-  console.log(line, firstDigit, lastDigit, +(`${firstDigit}${lastDigit}`))
-  sum += +(`${firstDigit}${lastDigit}`);
+  sum1 += +(`${firstDigit}${lastDigit}`);
+  const { firstDigit: fd1, lastDigit: ld1 } = findFirstAndLastDigits(line);
+  sum2 += +(`${fd1}${ld1}`);
 })
 
-console.log(sum);
+console.log('Part1:', sum1);
+console.log('Part2:', sum2);
